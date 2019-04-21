@@ -12,7 +12,7 @@ def experience_modifier(value):
 
 
 def heights_modifier(heights):
-    heights = heights.replace(' inches', '')
+    heights = int(heights.replace(' inches', ''))
     return heights
 
 
@@ -58,79 +58,90 @@ def team_assigner(rosters, sorted_players):
 
 
 def start(arg):
-    print("\n\n" + "*" * 10 + "BASKETBALL TEAM STATS TOOL" + "*" * 10)
-    print("\n\nMENU:\n\nTo Display Team Stats, Enter [1], to Quit, Enter [2]...\n\n")
-    compliance =int(input("Select an option >>>  "))
+        try:
+            print("\n\n" + "*" * 10 + "BASKETBALL TEAM STATS TOOL" + "*" * 10)
+            print("\n\nMENU:\n\nTo Display Team Stats, Enter [1], to Quit, Enter [2]...\n\n")
+            compliance =int(input("Select an option >>>  "))
 
 
-    if compliance == 1:
-        print("")
-    elif compliance == 2:
-        exit()
+            if compliance == 1:
+                print("")
+            elif compliance == 2:
+                exit()
     
-    else:
-        print("That is not a valid option. Please Enter [1] to Display Teams, or Enter [2] to Quit. ")
-        start(arg)
+            else:
+                raise ValueError
+        except ValueError as err:
+            print("\nYour selection was invalid: {} Returning to Main Menu. ".format(err))
+            start(arg)
+    
 
 def team_option():
     while True:
-        for team, number in enumerate(TEAMS, 1):
-            print(team, number)
+        try:
+            for team, number in enumerate(TEAMS, 1):
+                print(team, number)
+                print("")
+            option =int(input("\nSelect the team you would like to view. \n >>> "))
             print("")
-        option =int(input("\nSelect the team you would like to view. \n >>> "))
-        print("")
-        while True:
-            if option == 1:
-                print("PANTHERS TEAM:\n"
-                    "--------------------\n"
-                    "Total Players:")
-                print(len(rosters['Panthers']))
-                print("")
-                print(rosters['Panthers'])
-                continue_option = input("Would you like to view another team? [Y]es or [N]o? ")
-                if continue_option.lower() == "y":
-                    team_option()
-                elif continue_option.lower() == "n":
-                    exit()
-                else:
-                    print("That is not a valid selection. Please restart the program and try again.")
-                    exit()
+            while True:
+                try:
+                    if option == 1:
+                        names = rosters['Panthers']
+                        print("PANTHERS TEAM:\n"
+                            "--------------------\n"
+                            "Total Players:")
+                        print(len(rosters['Panthers']))
+                        print("")
+                        print(', '.join(names))
+                        continue_option = input("\nWould you like to view another team? [Y]es or [N]o?\n ")
+                        if continue_option.lower() == "y":
+                            team_option()
+                        elif continue_option.lower() == "n":
+                            exit()
+                        else:
+                            raise ValueError
+        
+                    elif option == 2:
+                        names = rosters['Bandits']
+                        print("BANDITS TEAM:\n"
+                            "--------------------\n"
+                            "Total Players:")
+                        print(len(rosters['Bandits']))
+                        print("")
+                        print(', '.join(names))
+                        continue_option = input("\nWould you like to view another team? [Y]es or [N]o?\n ")
+                        if continue_option.lower() == "y":
+                            team_option()
+                        elif continue_option.lower() == "n":
+                            exit()
+                        else:
+                            raise ValueError
+            
+                    elif option == 3:
+                        names = rosters['Warriors']
+                        print("WARRIORS TEAM:\n"
+                            "--------------------\n"
+                            "Total Players:")
+                        print(len(rosters['Warriors']))
+                        print("")
+                        print(', '.join(names))
+                        continue_option = input("\nWould you like to view another team? [Y]es or [N]o?\n ")
+                        if continue_option.lower() == "y":
+                            team_option()
+                        elif continue_option.lower() == "n":
+                            exit()
+                        else:
+                            raise ValueError
+                            
+                    else:
+                        raise ValueError
+                        
+                except ValueError:
+                    print("\nThat is not a valid option. Please try again.\n ")
 
-            elif option == 2:
-                print("BANDITS TEAM:\n"
-                    "--------------------\n"
-                    "Total Players:")
-                print(len(rosters['Bandits']))
-                print("")
-                print(rosters['Bandits'])
-                continue_option = input("Would you like to view another team? [Y]es or [N]o? ")
-                if continue_option.lower() == "y":
-                    team_option()
-                elif continue_option.lower() == "n":
-                    exit()
-                else:
-                    print("That is not a valid selection. Please restart the program and try again.")
-                    exit()
-    
-            elif option == 3:
-                print("WARRIORS TEAM:\n"
-                    "--------------------\n"
-                    "Total Players:")
-                print(len(rosters['Warriors']))
-                print("")
-                print(rosters['Warriors'])
-                continue_option = input("Would you like to view another team? [Y]es or [N]o? ")
-                if continue_option.lower() == "y":
-                    team_option()
-                elif continue_option.lower() == "n":
-                    exit()
-                else:
-                    print("That is not a valid selection. Restart the program and try again.")
-                    exit()
-
-    else:
-        print("That is not a valid option. Please select the team you would like to view using the numerical options provided.")
-        exit()
+        except ValueError:
+            print("\nThat is not a valid option. Please try again.\n ")
     
 
 
