@@ -1,4 +1,3 @@
-#I'm looking to merely pass this one
 
 from operator import itemgetter
 
@@ -134,11 +133,14 @@ def team_option():
                         else:
                             raise ValueError
                             
+                            
                     else:
                         raise ValueError
+                        team_option()
                         
                 except ValueError:
                     print("\nThat is not a valid option. Please try again.\n ")
+                    team_option()
 
         except ValueError:
             print("\nThat is not a valid option. Please try again.\n ")
